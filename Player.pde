@@ -15,7 +15,7 @@ class Player{
     this.distance   += 16.0;
     this.velocity   += 4.9;
     this.y += this.velocity;
-    this.ang += 16.0;
+    this.ang += 32.0;
     if(this.y > 376.0){
       this.ang = 0.0;
       this.y = 376.0;
