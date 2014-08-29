@@ -17,20 +17,17 @@ void setup(){
   fill(0);
   noStroke();
   rect(0, 400, 640, 480);
-  
-  player.init(52.0);
+
   Logo = loadImage("Logo.png");
+  restart();
   
-  for(int i=0; i<walls.length; i++){
-    walls[i] = new Wall();
-    walls[i].init(1200+600*count+random(150), HEIGHT[int(random(HEIGHT.length))]);
-    count ++;
-  }
   
   frameRate(60);
 }
 
 void draw(){
+  if(p5_Restart()) restart();
+  
   if(notGameOver){
     if(isStart){
       game();
@@ -38,7 +35,7 @@ void draw(){
       top();
     }
   }else{
-    //gameover();
+    //
   }
 }
 
@@ -48,7 +45,12 @@ void top(){
   fill(0);
   textSize(24);
   textAlign(CENTER);
-  text("Press Start", width/2, 380);
+  text("Tap to Start", width/2, 380);
+  
+  textSize(14);
+  textAlign(RIGHT);
+  text("Controll Guide", 600, 180);
+  text("Tap to Jump(Double Jump)", 600, 210);
   player.show();
 }
 
@@ -69,6 +71,8 @@ void game(){
 }
 
 void gameover(){
+  SetScore(nfc(player.distance, 1));
+  
   textSize(32);
   textAlign(CENTER);
   text("GAME OVER", width/2, height/2+16);
@@ -76,6 +80,25 @@ void gameover(){
   fill(255, 0, 0);
   textSize(16);
   text("Distance:"+nfc(player.distance, 1)+"m", width/2, height/2+32);
+  
+  fill(0);
+  stroke(255);
+  rect(220, 430, 80, 30);
+  fill(255);
+  textSize(16);
+  textAlign(CENTER);
+  text("Tweet", 260, 454);
+  noStroke();
+  
+  fill(0);
+  stroke(255);
+  rect(360, 430, 80, 30);
+  fill(255);
+  textSize(16);
+  textAlign(CENTER);
+  text("ReStart", 400, 454);
+  noStroke();
+  
 }
 
 
@@ -84,6 +107,19 @@ void mouseClicked(){
     player.jump();
   }else{
     isStart = true;
+  }
+  if(!notGameOver){
+    if(mouseY > 430 && mouseY < 460){
+      if(mouseX > 220 && mouseX < 300){
+link("http://twitter.com/share?url=http://potato4d.me/game/The_Jumper&text=The Jumperをプレイ！結果は" + nfc(player.distance, 1)+"m" +"でした。&related=potato4d&hashtags=The_Jumper", "_new");
+
+}
+      
+      if(mouseX > 360 && mouseX < 440){
+        restart();
+      }
+    }
+    
   }
 }
 
@@ -126,5 +162,19 @@ void Collision(){
         notGameOver = false;
       }
     }
+  }
+}
+
+void restart(){
+  count = 0;
+  isStart = false;
+  notGameOver = true;
+  
+  player.init(52.0);
+  
+  for(int i=0; i<walls.length; i++){
+    walls[i] = new Wall();
+    walls[i].init(1200+600*count+random(150), HEIGHT[int(random(HEIGHT.length))]);
+    count ++;
   }
 }

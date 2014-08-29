@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		
+		<title>The Jumper</title>
+		
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+			var isClick = false;
+			var score = 0.0;
+
+			function p5_Restart(){
+				var result = isClick;
+				isClick = false;
+				return result;
+			}
+			function js_Restart(){
+				isClick = true;
+			}
+			function SetScore(s){
+				score = s;
+			}
+
+			function tweet(){
+				window,open("http://twitter.com/share?url=http://potato4d.me/game/The_Jumper&text=The Jumperをプレイ！結果は" + score +"m" +"でした。&related=potato4d&hashtags=The_Jumper")
+			}
+		</script>
+		<!--[if lt IE 9]>
+			<script type="text/javascript">alert("Your browser does not support the canvas tag.");</script>
+		<![endif]-->
+		<script src="processing.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			// convenience function to get the id attribute of generated sketch html element
+			function getProcessingSketchId () { return 'thejumper'; }
+		</script>
+	</head>
+
+	<body>
+		<section>
+			<canvas id="@@id@@" data-processing-sources="@@sketch@@.pde" width="@@width@@" height="@@height@@">
+		</section>
+		<div id="buttons" class="sp-only">
+			<button type="submit" onClick="tweet()">Tweet</button>
+			<button type="submit" onClick="js_Restart()">ReStart</button>
+		</div>
+
+		<div id="menu">
+
+			<p>
+				仕様上はHTML5が動く各ブラウザにて、動作します。動作確認はChromeのみしています。<br>
+				他のブラウザで動かない場合は<a href="https://twitter.com/potato4d">@potato4d</a>まで。
+			</p>
+
+			<p class="sp-only">
+				原因不明の不具合により、<br>
+				スマートフォンでは、ゲーム内のTweet及びReStartボタンが効きませんので、<br>
+				ゲーム画面下の黒に近い灰色の該当ボタンを押してください。
+			</p>
+
+			<p>
+				<a href="http://potato4d.me">Potato4d.meに戻る</a>
+			</p>
+
+			<a href="https://twitter.com/share" class="twitter-share-button" data-via="potato4d" data-lang="ja" data-hashtags="The_Jumper">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+			<div class="fb-like" data-href="http://potato4d.me/game/The_Jumper/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+		</div>
+	</body>
+</html>
