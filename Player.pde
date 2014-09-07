@@ -1,19 +1,20 @@
 class Player{
   int jumpcnt;
-  float y, ang, distance, velocity, jumpHeight;
+  float y, ang, speed, distance, velocity, jumpHeight;
   
-  void init(float jumpHeight){
-    this.y        = 376.0;
+  void init(float jumpHeight, float speed){
     this.ang        = 0.0;
     this.velocity   = 0.0;
     this.distance   = 128.0;
-    
+    this.y          = 376.0;
+
+    this.speed      = speed;
     this.jumpHeight = jumpHeight;
   }
   
   void update(){
     this.distance   += 16.0;
-    this.velocity   += 4.9;
+    this.velocity   += this.speed;
     this.y += this.velocity;
     this.ang += 32.0;
     if(this.y > 376.0){

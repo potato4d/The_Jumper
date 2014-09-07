@@ -2,7 +2,7 @@ Player player = new Player();
 Wall[] walls  = new Wall[4];
 
 int count = 0;
-final float Base = 128;
+float Base = 128;
 
 PImage Logo = new PImage();
 boolean isStart    = false;
@@ -11,18 +11,15 @@ float[] HEIGHT = {64, 96, 160, 128, 222, 222};
 
 void setup(){
   size(640, 480);
-  
+  frameRate(60) ;
   background(255);
+  Logo = loadImage("Logo.png");
   
   fill(0);
   noStroke();
   rect(0, 400, 640, 480);
 
-  Logo = loadImage("Logo.png");
   restart();
-  
-  
-  frameRate(60);
 }
 
 void draw(){
@@ -34,9 +31,8 @@ void draw(){
     }else{
       top();
     }
-  }else{
-    //
   }
+
 }
 
 void top(){
@@ -81,24 +77,25 @@ void gameover(){
   textSize(16);
   text("Distance:"+nfc(player.distance, 1)+"m", width/2, height/2+32);
   
-  fill(0);
-  stroke(255);
-  rect(220, 430, 80, 30);
-  fill(255);
-  textSize(16);
-  textAlign(CENTER);
-  text("Tweet", 260, 454);
-  noStroke();
-  
-  fill(0);
-  stroke(255);
-  rect(360, 430, 80, 30);
-  fill(255);
-  textSize(16);
-  textAlign(CENTER);
-  text("ReStart", 400, 454);
-  noStroke();
-  
+  if(getWidth() >= 640){
+    fill(0);
+    stroke(255);
+    rect(220, 430, 80, 30);
+    fill(255);
+    textSize(16);
+    textAlign(CENTER);
+    text("Tweet", 260, 454);
+    noStroke();
+    
+    fill(0);
+    stroke(255);
+    rect(360, 430, 80, 30);
+    fill(255);
+    textSize(16);
+    textAlign(CENTER);
+    text("ReStart", 400, 454);
+    noStroke();
+  }
 }
 
 
@@ -108,18 +105,17 @@ void mouseClicked(){
   }else{
     isStart = true;
   }
+
   if(!notGameOver){
     if(mouseY > 430 && mouseY < 460){
       if(mouseX > 220 && mouseX < 300){
-link("http://twitter.com/share?url=http://potato4d.me/game/The_Jumper&text=The Jumperをプレイ！結果は" + nfc(player.distance, 1)+"m" +"でした。&related=potato4d&hashtags=The_Jumper", "_new");
+        link("http://twitter.com/share?url=http://potato4d.me/game/The_Jumper&text=The Jumperをプレイ！結果は" + nfc(player.distance, 1)+"m" +"でした。&related=potato4d&hashtags=The_Jumper", "_new");
+      }
 
-}
-      
       if(mouseX > 360 && mouseX < 440){
         restart();
       }
     }
-    
   }
 }
 
@@ -170,7 +166,7 @@ void restart(){
   isStart = false;
   notGameOver = true;
   
-  player.init(52.0);
+  player.init(52.0, 4.9);
   
   for(int i=0; i<walls.length; i++){
     walls[i] = new Wall();
