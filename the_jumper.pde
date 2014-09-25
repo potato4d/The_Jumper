@@ -2,16 +2,16 @@ Player player = new Player();
 Wall[] walls  = new Wall[4];
 
 int count = 0;
-float Base = 128;
+final float Base = 128;
 
 PImage Logo = new PImage();
 boolean isStart    = false;
 boolean notGameOver = true;
-float[] HEIGHT = {64, 96, 160, 128, 222, 222};
+final float[] HEIGHT = {64, 96, 160, 128, 222, 222};
 
 void setup(){
   size(640, 480);
-  frameRate(60) ;
+  frameRate(60);
   background(255);
   Logo = loadImage("Logo.png");
   
@@ -23,7 +23,9 @@ void setup(){
 }
 
 void draw(){
-  if(p5_Restart()) restart();
+  
+  // pjs only
+  //if(p5_Restart()) restart();
   
   if(notGameOver){
     if(isStart){
@@ -37,7 +39,7 @@ void draw(){
 
 void top(){
   SetDrawScreen();
-  image(Logo, 300 - Logo.width/2, 0);
+  image(Logo, 73, 0);
   fill(0);
   textSize(24);
   textAlign(CENTER);
@@ -67,7 +69,8 @@ void game(){
 }
 
 void gameover(){
-  SetScore(nfc(player.distance, 1));
+  // pjs only
+  // SetScore(nfc(player.distance, 1));
   
   textSize(32);
   textAlign(CENTER);
@@ -143,7 +146,7 @@ void showDistance(){
 }
 
 void Spawn(){
-  for(int i=0; i<walls.length; i++){
+  for(int i = 0; i < walls.length; i++){
     if(!walls[i].getExist()){
       walls[i].init(1200+600*count+random(150), HEIGHT[int(random(HEIGHT.length))]);
       count ++;
@@ -152,7 +155,7 @@ void Spawn(){
 }
 
 void Collision(){
-  for(int i=0; i<walls.length; i++){
+  for(int i = 0; i < walls.length; i++){
     if(24 > player.distance-walls[i].x+Base && 24 < player.distance-walls[i].x+32+Base){
       if(player.y+24 > 400-walls[i].y){
         notGameOver = false;
@@ -168,7 +171,7 @@ void restart(){
   
   player.init(52.0, 4.9);
   
-  for(int i=0; i<walls.length; i++){
+  for(int i = 0; i < walls.length; i++){
     walls[i] = new Wall();
     walls[i].init(1200+600*count+random(150), HEIGHT[int(random(HEIGHT.length))]);
     count ++;

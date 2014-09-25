@@ -1,4 +1,5 @@
 class Wall{
+  
   float x, y;
   private boolean isExist;
   
