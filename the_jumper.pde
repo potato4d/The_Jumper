@@ -1,3 +1,14 @@
+/****************************/
+//
+// The Jumper Source Code
+//
+// version:1.10
+// author :potato4d(Hanatani Takuma)
+// memo   :Android版の開発のため、こちらの開発は現在停止しています。
+//        :Android版については、非公開のリポジトリとなっていますが、
+//        :いずれ公開する時が来るかもしれません。
+/****************************/
+
 Player player = new Player();
 Wall[] walls  = new Wall[4];
 
@@ -49,6 +60,13 @@ void top(){
   textAlign(RIGHT);
   text("Controll Guide", 600, 180);
   text("Tap to Jump(Double Jump)", 600, 210);
+  
+  fill(255);
+  textAlign(LEFT);
+  text("The Jumper", 8, height-8);
+  textAlign(RIGHT);
+  text("(C) Potato4d", width-8, height-8);
+  
   player.show();
 }
 
@@ -102,7 +120,7 @@ void gameover(){
 }
 
 
-void mouseClicked(){
+void mousePressed(){
   if(isStart){
     player.jump();
   }else{
@@ -131,11 +149,6 @@ void SetDrawScreen(){
   
   fill(255);
   textSize(16);
-  
-  textAlign(LEFT);
-  text("The Jumper", 8, height-8);
-  textAlign(RIGHT);
-  text("(C) Potato4d", width-8, height-8);
 }
 
 void showDistance(){
