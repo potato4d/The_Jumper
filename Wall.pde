@@ -19,6 +19,14 @@ class Wall{
     }
   }
   
+  void show_notDelete(float distance){
+    fill(0);
+    if(x - distance < width){
+      rect(x - distance, 400-y, 32, y);
+    }
+  }
+  
+  
   void delete(){
     this.isExist = false;
   }

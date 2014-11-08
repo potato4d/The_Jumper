@@ -2,17 +2,19 @@
 //
 // The Jumper Source Code
 //
-// version:1.10
+// version:1.11
 // author :potato4d(Hanatani Takuma)
 // memo   :Android版の開発のため、こちらの開発は現在停止しています。
 //        :Android版については、非公開のリポジトリとなっていますが、
 //        :いずれ公開する時が来るかもしれません。
+//        :最終更新：2014/11/08
 /****************************/
 
 Player player = new Player();
 Wall[] walls  = new Wall[4];
 
 int count = 0;
+float go_scroll;
 final float Base = 128;
 
 PImage Logo = new PImage();
@@ -44,8 +46,22 @@ void draw(){
     }else{
       top();
     }
+  }else{
+    go_scroll -= 16.0;
+    SetDrawScreen();
+    showDistance();
+    pushMatrix();
+      translate(go_scroll, 0);
+      player.show();
+      for(int i=0; i<walls.length; i++){
+        walls[i].show_notDelete(player.distance);
+      }
+      Spawn();
+    popMatrix();
+    if(go_scroll < -152){
+      gameover();
+    }
   }
-
 }
 
 void top(){
@@ -83,7 +99,7 @@ void game(){
   
   Collision();
   Spawn();
-  if(!notGameOver) gameover();
+  //if(!notGameOver) gameover();
 }
 
 void gameover(){
@@ -181,7 +197,7 @@ void restart(){
   count = 0;
   isStart = false;
   notGameOver = true;
-  
+  go_scroll = 0.0;
   player.init(52.0, 4.9);
   
   for(int i = 0; i < walls.length; i++){
